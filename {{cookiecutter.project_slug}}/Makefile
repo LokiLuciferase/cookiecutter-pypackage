@@ -52,7 +52,7 @@ lint: ## check style with flake8
 
 test: ## run tests quickly with the default Python
 {%- if cookiecutter.use_pytest == 'y' %}
-	pytest
+	pytest --cov={{ cookiecutter.project_slug }}
 {%- else %}
 	python setup.py test
 {%- endif %}
