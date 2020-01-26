@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+from subprocess import call, DEVNULL
 
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 
@@ -20,3 +21,7 @@ if __name__ == '__main__':
 
     if 'Not open source' == '{{ cookiecutter.open_source_license }}':
         remove_file('LICENSE')
+
+    call(['git', 'init'], stderr=DEVNULL, stdout=DEVNULL)
+    call(['git', 'add', '*'], stderr=DEVNULL, stdout=DEVNULL)
+    call(['git', 'commit', '-m', 'Initial commit'], stderr=DEVNULL, stdout=DEVNULL)
