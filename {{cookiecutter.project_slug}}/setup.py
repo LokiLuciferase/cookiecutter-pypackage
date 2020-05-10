@@ -3,30 +3,17 @@
 """The setup script."""
 
 from setuptools import setup, find_packages
-from pip._internal.req import parse_requirements
-from pip._internal.download import PipSession
+from pkg_resources import parse_requirements
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
-
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-parsed_requirements = parse_requirements(
-    'requirements/prod.txt',
-    session=PipSession()
-)
-
-
-parsed_test_requirements = parse_requirements(
-    'requirements/test.txt',
-    session=PipSession()
-)
-
-
-requirements = [str(ir.req) for ir in parsed_requirements]
-test_requirements = [str(tr.req) for tr in parsed_test_requirements]
-
+with open('requirements/prod.txt') as prod_req:
+    requirements = [str(ir) for ir in parse_requirements(prod_req)]
+with open('requirements/test.txt') as test_req:
+    test_requirements = [str(ir) for ir in parse_requirements(test_req)]
 
 {%- set license_classifiers = {
     'MIT license': 'License :: OSI Approved :: MIT License',
