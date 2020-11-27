@@ -43,6 +43,9 @@ Options
 
 The following package configuration options set up different features for your project.
 
+use_strict_typing
+    Whether to use strict type checking (statically with `mypy <http://mypy-lang.org/>`_ during pre_commit, dynamically during testing with `typeguard <https://typeguard.readthedocs.io/>`_)
+
 use_precommit
     Whether to install a comprehensive set of `pre-commit <https://pre-commit.com/>`_ hooks to automatically perform code reformatting previous to commits and pushes.
 

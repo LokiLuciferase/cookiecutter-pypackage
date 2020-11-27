@@ -36,6 +36,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinx_autodoc_typehints',
+    {% if cookiecutter.command_line_interface | lower == 'click' %}'sphinx_click',{% endif %}
 ]
 
 # Add any paths that contain templates here, relative to this directory.

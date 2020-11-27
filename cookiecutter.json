@@ -8,6 +8,7 @@
     "pypi_username": "{{ cookiecutter.github_username }}",
     "year": "2020",
     "version": "0.0.1",
+    "use_strict_typing": "y",
     "use_precommit": "y",
     "use_pytest": "y",
     "use_pypi_deployment_with_travis": "n",

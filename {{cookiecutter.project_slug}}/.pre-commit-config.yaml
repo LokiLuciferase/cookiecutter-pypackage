@@ -1,8 +1,13 @@
-repos:
+repos:{% if cookiecutter.use_strict_typing == 'y' %}
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.790
+    hooks:
+      - id: mypy
+        name: Static type checks (mypy){% endif %}
   - repo: local
     hooks:
       - id: black
-        name: black
+        name: Code Reformatting (black)
         entry: black
         language: system
         types: [python]
@@ -14,8 +19,8 @@ repos:
         name: Reorder python imports
         entry: reorder-python-imports
         language: system
-        types: [ python ]
-        args: [ --application-directories=src ]
+        types: [python]
+        args: [--application-directories=src]
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.3.0
     hooks:
