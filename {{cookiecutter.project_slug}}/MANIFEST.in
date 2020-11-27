@@ -1,8 +1,8 @@
-{% if cookiecutter.create_author_file == 'y' -%}
+{% if cookiecutter.detailed_contribution_info == 'y' -%}
 include AUTHORS.rst
-{% endif -%}
 include CONTRIBUTING.rst
 include HISTORY.rst
+{% endif -%}
 include LICENSE
 include README.rst
 

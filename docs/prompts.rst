@@ -43,6 +43,9 @@ Options
 
 The following package configuration options set up different features for your project.
 
+use_precommit
+    Whether to install a comprehensive set of `pre-commit <https://pre-commit.com/>`_ hooks to automatically perform code reformatting previous to commits and pushes.
+
 use_pytest
     Whether to use `pytest <https://docs.pytest.org/en/latest/>`_
 
@@ -55,8 +58,8 @@ add_pyup_badge
 command_line_interface
     Whether to create a console script using Click. Console script entry point will match the project_slug. Options: ['Click', 'Argparse', 'No command-line interface']
 
-create_author_file
-    Whether to create an authors file
+detailed_contribution_info
+    Whether to create an authors file, a history file and a contributing file for the project
 
 open_source_license
     Choose a `license <https://choosealicense.com/>`_. Options: [1. MIT License, 2. BSD license, 3. ISC license, 4. Apache Software License 2.0, 5. GNU General Public License v3, 6. Not open source]

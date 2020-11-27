@@ -11,9 +11,13 @@ def remove_file(filepath):
 
 if __name__ == '__main__':
 
-    if '{{ cookiecutter.create_author_file }}' != 'y':
+    if '{{ cookiecutter.detailed_contribution_info }}' != 'y':
         remove_file('AUTHORS.rst')
+        remove_file('CONTRIBUTING.rst')
+        remove_file('HISTORY.rst')
         remove_file('docs/authors.rst')
+        remove_file('docs/history.rst')
+        remove_file('docs/contributing.rst')
 
     if 'no' in '{{ cookiecutter.command_line_interface|lower }}':
         cli_file = os.path.join('{{ cookiecutter.project_slug }}', 'cli.py')
@@ -22,6 +26,10 @@ if __name__ == '__main__':
     if 'Not open source' == '{{ cookiecutter.open_source_license }}':
         remove_file('LICENSE')
 
+    print('Setting up git.')
     call(['git', 'init'], stderr=DEVNULL, stdout=DEVNULL)
     call(['git', 'add', '*'], stderr=DEVNULL, stdout=DEVNULL)
     call(['git', 'commit', '-m', 'Initial commit'], stderr=DEVNULL, stdout=DEVNULL)
+    if '{{ cookiecutter.use_precommit }}' == 'y':
+        print('Setting up pre-commit.')
+        call(['pre-commit', 'install'])

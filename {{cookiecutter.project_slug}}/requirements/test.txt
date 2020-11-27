@@ -1,4 +1,3 @@
--r prod.txt
 {% if cookiecutter.use_pytest == 'y' -%}
 pytest>=4.6.5
 pytest-runner>=5.1
