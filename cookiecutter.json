@@ -11,6 +11,12 @@
     "use_strict_typing": "y",
     "use_precommit": "y",
     "use_pytest": "y",
+    "ci_strategy": [
+        "Do not use CI",
+        "Github",
+        "Bitbucket",
+        "Travis"
+    ],
     "use_pypi_deployment_with_travis": "n",
     "add_pyup_badge": "n",
     "detailed_contribution_info": "n",

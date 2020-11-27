@@ -19,6 +19,16 @@ if __name__ == '__main__':
         remove_file('docs/history.rst')
         remove_file('docs/contributing.rst')
 
+    if '{{ cookiecutter.ci_strategy }}'.lower() != 'travis':
+        remove_file('.travis.yml')
+    if '{{ cookiecutter.ci_strategy }}'.lower() != 'github':
+        remove_file('.github/workflows/ci.yml')
+    if '{{ cookiecutter.ci_strategy }}'.lower() != 'bitbucket':
+        remove_file('bitbucket-pipelines.yml')
+
+    if '{{ cookiecutter.use_precommit }}' != 'y':
+        remove_file('.pre-commit-config.yaml')
+
     if 'no' in '{{ cookiecutter.command_line_interface|lower }}':
         cli_file = os.path.join('{{ cookiecutter.project_slug }}', 'cli.py')
         remove_file(cli_file)
