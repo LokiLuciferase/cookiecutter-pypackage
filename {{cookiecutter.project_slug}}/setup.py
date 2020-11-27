@@ -7,8 +7,11 @@ from pkg_resources import parse_requirements
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
+{% if cookiecutter.detailed_contribution_info == 'y' -%}
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
+{% else %}
+history = ''{% endif %}
 
 with open('requirements/prod.txt') as prod_req:
     requirements = [str(ir) for ir in parse_requirements(prod_req)]
