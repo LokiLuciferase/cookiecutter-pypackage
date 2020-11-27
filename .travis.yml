@@ -17,10 +17,10 @@ script: tox
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
-  user: audreyr
+  user: LokiLuciferase
   password:
     secure: PLEASE_REPLACE_ME
   on:
     tags: true
-    repo: audreyr/python_boilerplate
+    repo: LokiLuciferase/python_boilerplate
     python: 3.8
