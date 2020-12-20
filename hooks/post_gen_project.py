@@ -42,4 +42,8 @@ if __name__ == '__main__':
     call(['git', 'commit', '-m', 'Initial commit'], stderr=DEVNULL, stdout=DEVNULL)
     if '{{ cookiecutter.use_precommit }}' == 'y':
         print('Setting up pre-commit.')
-        call(['pre-commit', 'install'])
+        try:
+            call(['pre-commit', 'install'])
+        except FileNotFoundError:
+            print('To install pre-commit hooks, run "pre-commit install" in the newly created project.')
+

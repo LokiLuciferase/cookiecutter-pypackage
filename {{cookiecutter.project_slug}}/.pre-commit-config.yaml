@@ -3,7 +3,8 @@ repos:{% if cookiecutter.use_strict_typing == 'y' %}
     rev: v0.790
     hooks:
       - id: mypy
-        name: Static type checks (mypy){% endif %}
+        name: Static type checks (mypy)
+        exclude: 'docs'{% endif %}
   - repo: local
     hooks:
       - id: black
