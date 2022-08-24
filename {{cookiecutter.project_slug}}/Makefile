@@ -22,6 +22,11 @@ endef
 export PRINT_HELP_PYSCRIPT
 
 BROWSER := python -c "$$BROWSER_PYSCRIPT"
+PACKAGE_NAME = {{ cookiecutter.project_slug }}
+DOCKER_LOCAL_NAME = NULL
+DOCKER_TARGET = NULL
+DOCKER_TAG = latest
+AWS_PROFILE = share
 
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
@@ -66,24 +71,63 @@ coverage: ## check code coverage quickly with the default Python
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html
+lint: ## check style with flake8
+	flake8 $(PACKAGE_NAME) tests
+
+format:
+	black -S -l 100 $(PACKAGE_NAME) tests setup.py
+	docformatter --wrap-summaries 100 --wrap-descriptions 100 --pre-summary-newline -i -r $(PACKAGE_NAME) tests setup.py
+
+test: ## run tests quickly with the default Python
+	pytest --cov=$(PACKAGE_NAME) tests
+	coverage xml
+
+tc-test:
+	pytest --cov=$(PACKAGE_NAME) --typeguard-packages=$(PACKAGE_NAME) tests
+	coverage xml
+
+dl-tc-test:
+	LONG_TESTS=true pytest --cov=$(PACKAGE_NAME) --typeguard-packages=$(PACKAGE_NAME) tests
+	coverage xml
+
+coverage: ## check code coverage quickly with the default Python
+	coverage run --source $(PACKAGE_NAME) -m pytest
+	coverage report -m
+	coverage html
+	coverage xml
+	$(BROWSER) htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/{{ cookiecutter.project_slug }}.rst
+	rm -f docs/$(PACKAGE_NAME).rst
 	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ {{ cookiecutter.project_slug }}
+	sphinx-apidoc -o docs/ $(PACKAGE_NAME)
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
+	$(BROWSER) docs/_build/html/index.html
 
-servedocs: docs ## compile the docs watching for changes
-	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
+githash:  ## create git hash for current repo HEAD
+	[ ! -z "`git status`" ] && echo `git describe --match=DONOTMATCH --always --abbrev=40 --dirty` > $(PACKAGE_NAME)/.githash || echo 'Could not write githash.'
 
-release: dist ## package and upload a release
-	twine upload dist/*
+docker-build:  ## build docker container
+	# Building image $(DOCKER_LOCAL_NAME):$(DOCKER_TAG)...
+	docker build -t $(DOCKER_LOCAL_NAME):$(DOCKER_TAG) --label githash=$$(cat $(PACKAGE_NAME)/.githash) .
 
-dist: clean ## builds source and wheel package
-	python setup.py sdist
-	python setup.py bdist_wheel
-	ls -l dist
+docker-build-tested:  ## build docker container and test afterwards
+	# Building image $(DOCKER_LOCAL_NAME):$(DOCKER_TAG)...
+	docker build --build-arg DO_TEST=true -t $(DOCKER_LOCAL_NAME):$(DOCKER_TAG) --label githash=$$(cat $(PACKAGE_NAME)/.githash) .
+
+docker-login:  ## login to ECR
+	aws --profile $(AWS_PROFILE) ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin $(DOCKER_TARGET)
+
+docker-push: docker-login  ## push docker container
+	# Pushing image $(DOCKER_LOCAL_NAME):$(DOCKER_TAG) to $(DOCKER_TARGET):$(DOCKER_TAG)...
+	docker tag $(DOCKER_LOCAL_NAME):$(DOCKER_TAG) $(DOCKER_TARGET):$(DOCKER_TAG)
+	docker push $(DOCKER_TARGET):$(DOCKER_TAG)
+
+docker-pull: docker-login  ## pull docker container
+	docker pull $(DOCKER_TARGET):$(DOCKER_TAG)
+
+docker: githash docker-build docker-push  ## build and push docker image
 
 install: clean ## install the package to the active Python's site-packages
 	pip install .
