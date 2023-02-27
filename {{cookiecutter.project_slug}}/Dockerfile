@@ -21,6 +21,7 @@ RUN python3 -m venv /opt/venv
 
 # Install Python dependencies
 ADD . /opt/{{cookiecutter.project_slug}}
-RUN cd /opt/{{cookiecutter.project_slug}} \
+RUN --mount=type=cache,target=/root/.cache/pip \
+    cd /opt/{{cookiecutter.project_slug}} \
     && source /opt/venv/bin/activate \
     && make install
