@@ -90,11 +90,11 @@ githash:  ## create git hash for current repo HEAD
 {% if cookiecutter.use_docker == 'y' -%}
 docker-build: githash  ## build docker container
 	# Building image $(DOCKER_LOCAL_NAME):$(DOCKER_TAG)...
-	docker build -t $(DOCKER_LOCAL_NAME):$(DOCKER_TAG) --label githash=$$(cat $(PACKAGE_NAME)/.githash) .
+	DOCKER_BUILDKIT=1 docker build -t $(DOCKER_LOCAL_NAME):$(DOCKER_TAG) --label githash=$$(cat $(PACKAGE_NAME)/.githash) .
 
 docker-build-tested: githash  ## build docker container and test afterwards
 	# Building image $(DOCKER_LOCAL_NAME):$(DOCKER_TAG)...
-	docker build --build-arg DO_TEST=true -t $(DOCKER_LOCAL_NAME):$(DOCKER_TAG) --label githash=$$(cat $(PACKAGE_NAME)/.githash) .
+	DOCKER_BUILDKIT=1 docker build --build-arg DO_TEST=true -t $(DOCKER_LOCAL_NAME):$(DOCKER_TAG) --label githash=$$(cat $(PACKAGE_NAME)/.githash) .
 
 docker-login:  ## login to ECR
 	aws --profile ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin $(DOCKER_TARGET)
