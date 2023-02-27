@@ -53,25 +53,6 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .pytest_cache
 
 lint: ## check style with flake8
-	flake8 {{ cookiecutter.project_slug }} tests
-
-test: ## run tests quickly with the default Python
-{%- if cookiecutter.use_pytest == 'y' %}
-	pytest --cov={{ cookiecutter.project_slug }}{% if cookiecutter.use_strict_typing == 'y' %} --typeguard-packages={{ cookiecutter.project_slug }} {% endif %} tests
-{%- else %}
-	python setup.py test
-{%- endif %}
-
-coverage: ## check code coverage quickly with the default Python
-{%- if cookiecutter.use_pytest == 'y' %}
-	coverage run --source {{ cookiecutter.project_slug }} -m pytest
-{%- else %}
-	coverage run --source {{ cookiecutter.project_slug }} setup.py test
-{%- endif %}
-	coverage report -m
-	coverage html
-	$(BROWSER) htmlcov/index.html
-lint: ## check style with flake8
 	flake8 $(PACKAGE_NAME) tests
 
 format:

@@ -49,9 +49,6 @@ use_strict_typing
 use_precommit
     Whether to install a comprehensive set of `pre-commit <https://pre-commit.com/>`_ hooks to automatically perform code reformatting previous to commits and pushes.
 
-use_pytest
-    Whether to use `pytest <https://docs.pytest.org/en/latest/>`_
-
 use_pypi_deployment_with_travis
     Whether to use PyPI deployment with `Travis <https://travis-ci.org/>`_.
 
