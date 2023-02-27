@@ -23,10 +23,9 @@ export PRINT_HELP_PYSCRIPT
 
 BROWSER := python -c "$$BROWSER_PYSCRIPT"
 PACKAGE_NAME = {{ cookiecutter.project_slug }}
-DOCKER_LOCAL_NAME = NULL
+DOCKER_LOCAL_NAME = {{ cookiecutter.project_slug }}
 DOCKER_TARGET = NULL
 DOCKER_TAG = latest
-AWS_PROFILE = share
 
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
@@ -88,17 +87,17 @@ docs: ## generate Sphinx HTML documentation, including API docs
 
 githash:  ## create git hash for current repo HEAD
 	[ ! -z "`git status`" ] && echo `git describe --match=DONOTMATCH --always --abbrev=40 --dirty` > $(PACKAGE_NAME)/.githash || echo 'Could not write githash.'
-
-docker-build:  ## build docker container
+{% if cookiecutter.use_docker == 'y' -%}
+docker-build: githash  ## build docker container
 	# Building image $(DOCKER_LOCAL_NAME):$(DOCKER_TAG)...
 	docker build -t $(DOCKER_LOCAL_NAME):$(DOCKER_TAG) --label githash=$$(cat $(PACKAGE_NAME)/.githash) .
 
-docker-build-tested:  ## build docker container and test afterwards
+docker-build-tested: githash  ## build docker container and test afterwards
 	# Building image $(DOCKER_LOCAL_NAME):$(DOCKER_TAG)...
 	docker build --build-arg DO_TEST=true -t $(DOCKER_LOCAL_NAME):$(DOCKER_TAG) --label githash=$$(cat $(PACKAGE_NAME)/.githash) .
 
 docker-login:  ## login to ECR
-	aws --profile $(AWS_PROFILE) ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin $(DOCKER_TARGET)
+	aws --profile ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin $(DOCKER_TARGET)
 
 docker-push: docker-login  ## push docker container
 	# Pushing image $(DOCKER_LOCAL_NAME):$(DOCKER_TAG) to $(DOCKER_TARGET):$(DOCKER_TAG)...
@@ -109,11 +108,11 @@ docker-pull: docker-login  ## pull docker container
 	docker pull $(DOCKER_TARGET):$(DOCKER_TAG)
 
 docker: githash docker-build docker-push  ## build and push docker image
-
-install: clean ## install the package to the active Python's site-packages
+{% endif %}
+install: clean githash  ## install the package to the active Python's site-packages
 	pip install .
 
-install-dev: clean ## install for development
+install-dev: clean githash  ## install for development
 	pip install -r requirements/dev.txt
 	pip install -r requirements/test.txt
 	pip install -r requirements/prod.txt

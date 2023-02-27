@@ -29,6 +29,9 @@ if __name__ == '__main__':
     if '{{ cookiecutter.use_precommit }}' != 'y':
         remove_file('.pre-commit-config.yaml')
 
+    if '{{ cookiecutter.use_docker }}' != 'y':
+        remove_file('Dockerfile')
+
     if 'no' in '{{ cookiecutter.command_line_interface|lower }}':
         cli_file = os.path.join('{{ cookiecutter.project_slug }}', 'cli.py')
         remove_file(cli_file)

@@ -49,8 +49,8 @@ use_strict_typing
 use_precommit
     Whether to install a comprehensive set of `pre-commit <https://pre-commit.com/>`_ hooks to automatically perform code reformatting previous to commits and pushes.
 
-use_pypi_deployment_with_travis
-    Whether to use PyPI deployment with `Travis <https://travis-ci.org/>`_.
+use_docker
+    Whether to include a `Dockerfile <https://docs.docker.com/engine/reference/builder/>`_ for the project
 
 add_pyup_badge
     Whether to include a `pyup <https://github.com/pyupio/pyup>`_ badge
