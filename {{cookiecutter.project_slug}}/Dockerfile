@@ -4,6 +4,7 @@ LABEL maintainer="{{cookiecutter.full_name}} <{{cookiecutter.email}}>"
 LABEL description="A Docker image for {{cookiecutter.project_name}}"
 
 SHELL ["/bin/bash", "-c"]
+ENV PATH=$PATH:/opt/venv/bin
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install system dependencies
