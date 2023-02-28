@@ -9,10 +9,17 @@
 {% if is_open_source %}
 .. image:: https://img.shields.io/pypi/v/{{ cookiecutter.project_slug }}.svg
         :target: https://pypi.python.org/pypi/{{ cookiecutter.project_slug }}
+        :alt: Package on PyPI
 
-.. image:: https://readthedocs.org/projects/{{ cookiecutter.project_slug | replace("_", "-") }}/badge/?version=latest
-        :target: https://{{ cookiecutter.project_slug | replace("_", "-") }}.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
+{% if cookiecutter.ci_strategy == 'Github' %}
+.. image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/ci.yml/badge.svg
+   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/ci.yml
+   :alt: Build Status
+
+.. image:: https://img.shields.io/badge/Documentation-Github-blue
+   :target: https://{{cookiecutter.github_username }}.github.io/{{cookiecutter.project_slug}}/
+   :alt: Documentation
+{%- endif %}
 {%- endif %}
 
 {% if cookiecutter.add_pyup_badge == 'y' %}
@@ -26,7 +33,6 @@
 
 {% if is_open_source %}
 * Free software: {{ cookiecutter.open_source_license }}
-* Documentation: https://{{ cookiecutter.project_slug | replace("_", "-") }}.readthedocs.io.
 {% endif %}
 
 Features
