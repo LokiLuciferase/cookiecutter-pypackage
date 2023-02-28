@@ -3,15 +3,18 @@
 on:
     push:
         branches:
-            - master
-            - feature/ci
+            - "master"
+            - "main"
+            - "dev"
+            - "dev/*"
+            - "ci"
 
 jobs:
     test:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                python-version: [3.9, 3.10]
+                python-version: ["3.9", "3.10"]
 
         steps:
             - uses: actions/checkout@v2
@@ -28,4 +31,4 @@ jobs:
                   make lint
             - name: Run Tests
               run: |
-                  tox -e py{% endraw %}
+                  make tc-test{% endraw %}
