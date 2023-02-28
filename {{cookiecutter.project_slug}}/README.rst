@@ -12,13 +12,13 @@
         :alt: Package on PyPI
 
 {% if cookiecutter.ci_strategy == 'Github' %}
-.. image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/ci.yml/badge.svg
-   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/ci.yml
-   :alt: Build Status
-
 .. image:: https://img.shields.io/badge/Documentation-Github-blue
    :target: https://{{cookiecutter.github_username }}.github.io/{{cookiecutter.project_slug}}/
    :alt: Documentation
+
+.. image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/ci.yml/badge.svg
+   :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/ci.yml
+   :alt: Build Status
 {%- endif %}
 {%- endif %}
 

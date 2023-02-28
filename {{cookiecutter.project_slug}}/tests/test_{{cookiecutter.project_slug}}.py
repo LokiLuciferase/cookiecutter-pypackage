@@ -8,6 +8,7 @@ from {{ cookiecutter.project_slug }} import cli
 
 import {{ cookiecutter.project_slug }}
 
+
 @pytest.fixture
 def response():
     """Sample pytest fixture.
