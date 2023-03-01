@@ -21,9 +21,12 @@ if __name__ == '__main__':
 
     if '{{ cookiecutter.ci_strategy }}'.lower() != 'travis':
         remove_file('.travis.yml')
+
     if '{{ cookiecutter.ci_strategy }}'.lower() != 'github':
         remove_file('.github/workflows/ci.yml')
         remove_file('.github/workflows/docs.yml')
+        remove_file('.github/workflows/coverage.yml')
+
     if '{{ cookiecutter.ci_strategy }}'.lower() != 'bitbucket':
         remove_file('bitbucket-pipelines.yml')
 
