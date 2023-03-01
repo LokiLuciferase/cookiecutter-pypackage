@@ -3,10 +3,12 @@
 import pytest
 {%- if cookiecutter.command_line_interface|lower == 'click' %}
 from click.testing import CliRunner
-from {{ cookiecutter.project_slug }} import cli
-{%- endif %}
 
 import {{ cookiecutter.project_slug }}
+from {{ cookiecutter.project_slug }} import cli
+{%- else %}
+import {{ cookiecutter.project_slug }}
+{%- endif %}
 
 
 @pytest.fixture

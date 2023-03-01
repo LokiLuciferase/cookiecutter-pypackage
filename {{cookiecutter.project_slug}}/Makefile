@@ -77,6 +77,10 @@ coverage: ## check code coverage quickly with the default Python
 	coverage xml
 	$(BROWSER) htmlcov/index.html
 
+{% if cookiecutter.use_precommit -%}
+pre-commit: ## run pre-commit hooks
+	pre-commit run --all-files
+{% endif %}
 docs: ## generate Sphinx HTML documentation, including API docs
 	rm -f docs/$(PACKAGE_NAME).rst
 	rm -f docs/modules.rst

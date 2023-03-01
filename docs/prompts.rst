@@ -52,9 +52,6 @@ use_precommit
 use_docker
     Whether to include a `Dockerfile <https://docs.docker.com/engine/reference/builder/>`_ for the project
 
-add_pyup_badge
-    Whether to include a `pyup <https://github.com/pyupio/pyup>`_ badge
-
 command_line_interface
     Whether to create a console script using Click. Console script entry point will match the project_slug. Options: ['Click', 'Argparse', 'No command-line interface']
 

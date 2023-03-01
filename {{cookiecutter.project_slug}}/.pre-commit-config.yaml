@@ -25,7 +25,6 @@ repos:{% if cookiecutter.use_strict_typing == 'y' %}
         name: Reorder python imports
         entry: reorder-python-imports
         types: [python]
-        args: [--application-directories=src]
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:

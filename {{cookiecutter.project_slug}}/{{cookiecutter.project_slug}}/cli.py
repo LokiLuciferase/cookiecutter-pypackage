@@ -6,6 +6,7 @@ import argparse
 import sys
 
 {%- if cookiecutter.command_line_interface|lower == 'click' %}
+
 import click
 
 
