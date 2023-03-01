@@ -71,12 +71,14 @@ coverage: ## check code coverage quickly with the default Python
 pre-commit: ## run pre-commit hooks
 	pre-commit run --all-files
 {% endif %}
-docs: ## generate Sphinx HTML documentation, including API docs
+docs-build:
 	rm -f docs/$(PACKAGE_NAME).rst
 	rm -f docs/modules.rst
 	sphinx-apidoc -o docs/ $(PACKAGE_NAME)
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
+
+docs: docs-build ## generate Sphinx HTML documentation, including API docs
 	${BROWSER} docs/_build/html/index.html
 
 githash:  ## create git hash for current repo HEAD
