@@ -1,15 +1,6 @@
 .PHONY: clean clean-test clean-pyc clean-build docs help
 .DEFAULT_GOAL := help
 
-define BROWSER_PYSCRIPT
-import os, webbrowser, sys
-
-from urllib.request import pathname2url
-
-webbrowser.open("file://" + pathname2url(os.path.abspath(sys.argv[1])))
-endef
-export BROWSER_PYSCRIPT
-
 define PRINT_HELP_PYSCRIPT
 import re, sys
 
@@ -21,7 +12,6 @@ for line in sys.stdin:
 endef
 export PRINT_HELP_PYSCRIPT
 
-BROWSER := python -c "$$BROWSER_PYSCRIPT"
 PACKAGE_NAME = {{ cookiecutter.project_slug }}
 DOCKER_LOCAL_NAME = {{ cookiecutter.project_slug }}
 DOCKER_TARGET = NULL
@@ -75,7 +65,7 @@ coverage: ## check code coverage quickly with the default Python
 	coverage report -m
 	coverage html
 	coverage xml
-	$(BROWSER) htmlcov/index.html
+	${BROWSER} htmlcov/index.html
 
 {% if cookiecutter.use_precommit -%}
 pre-commit: ## run pre-commit hooks
@@ -87,7 +77,7 @@ docs: ## generate Sphinx HTML documentation, including API docs
 	sphinx-apidoc -o docs/ $(PACKAGE_NAME)
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
-	$(BROWSER) docs/_build/html/index.html
+	${BROWSER} docs/_build/html/index.html
 
 githash:  ## create git hash for current repo HEAD
 	[ ! -z "`git status`" ] && echo `git describe --match=DONOTMATCH --always --abbrev=40 --dirty` > $(PACKAGE_NAME)/.githash || echo 'Could not write githash.'
