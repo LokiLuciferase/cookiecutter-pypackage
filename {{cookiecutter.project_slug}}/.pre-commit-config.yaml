@@ -4,8 +4,8 @@ repos:{% if cookiecutter.use_strict_typing == 'y' %}
     hooks:
       - id: mypy
         name: Static type checks (mypy)
-        exclude: "docs"{% endif %}
-        additional_dependencies: [types-setuptools]
+        exclude: "docs"
+        additional_dependencies: [types-setuptools]{% endif %}
   - repo: https://github.com/psf/black
     rev: 22.6.0
     hooks:
