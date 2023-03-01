@@ -14,5 +14,6 @@ Click>=8.0
 sphinx-click{% endif %}
 {% if cookiecutter.use_precommit == 'y' -%}
 pre-commit>=3.0
-pre-commit-hooks==4.4.0{% endif %}{% if cookiecutter.use_strict_typing == 'y' -%}mypy>=1.0
-typeguard>=2.10.0{% endif %}
+pre-commit-hooks==4.4.0{% endif %}{% if cookiecutter.use_strict_typing == 'y' -%}
+mypy>=1.0{% endif %}
+typeguard>=2.10.0
