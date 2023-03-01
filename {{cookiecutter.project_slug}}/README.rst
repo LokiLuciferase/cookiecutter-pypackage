@@ -19,6 +19,10 @@
 .. image:: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/ci.yml/badge.svg
    :target: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/ci.yml
    :alt: Build Status
+
+.. image:: https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}/raw/python-coverage-comment-action-data/badge.svg
+   :target: https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}/raw/python-coverage-comment-action-data/badge.svg
+   :alt: Coverage Status
 {%- endif %}
 {%- endif %}
 
