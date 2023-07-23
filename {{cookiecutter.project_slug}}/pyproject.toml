@@ -17,3 +17,19 @@ exclude = '''
   | dist
 )/
 '''
+
+[tool.bumpver]
+current_version = "{{ cookiecutter.version }}"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit_message = "bump version {old_version} -> {new_version}"
+commit = true
+tag = true
+push = false
+
+[tool.bumpver.file_patterns]
+"setup.py" = [
+    "{version}",
+]
+"{{ cookiecutter.project_slug }}/__init__.py" = [
+    "__version__ = '{version}'",
+]
