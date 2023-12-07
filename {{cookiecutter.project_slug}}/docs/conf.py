@@ -22,7 +22,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath('..'))
 
-import {{ cookiecutter.project_slug }}
+import {{ cookiecutter.project_slug }}  # noqa: E402
 
 # -- General configuration ---------------------------------------------
 
@@ -170,6 +170,7 @@ texinfo_documents = [
         'Miscellaneous',
     ),
 ]
+
 
 # use custom CSS to make source code readable
 def setup(app):

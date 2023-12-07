@@ -19,9 +19,6 @@ if __name__ == '__main__':
         remove_file('docs/history.rst')
         remove_file('docs/contributing.rst')
 
-    if '{{ cookiecutter.ci_strategy }}'.lower() != 'travis':
-        remove_file('.travis.yml')
-
     if '{{ cookiecutter.ci_strategy }}'.lower() != 'github':
         remove_file('.github/workflows/ci.yml')
         remove_file('.github/workflows/docs.yml')
@@ -51,6 +48,7 @@ if __name__ == '__main__':
         print('Setting up pre-commit.')
         try:
             call(['pre-commit', 'install'])
+            call(['pre-commit', 'autoupdate'])
         except FileNotFoundError:
             print('To install pre-commit hooks, run "pre-commit install" in the newly created project.')
 

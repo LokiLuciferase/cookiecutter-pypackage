@@ -14,7 +14,6 @@
     "ci_strategy": [
         "Github",
         "Bitbucket",
-        "Travis",
         "Do not use CI"
     ],
     "detailed_contribution_info": "n",
