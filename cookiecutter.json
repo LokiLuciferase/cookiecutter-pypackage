@@ -13,7 +13,6 @@
     "use_docker": "y",
     "ci_strategy": [
         "Github",
-        "Bitbucket",
         "Do not use CI"
     ],
     "detailed_contribution_info": "n",

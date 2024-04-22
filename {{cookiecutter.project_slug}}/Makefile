@@ -41,23 +41,19 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr htmlcov/
 	rm -fr .pytest_cache
 
-lint: ## check style with flake8
-	flake8 $(PACKAGE_NAME) tests
 
-format:
-	black -S -l 100 $(PACKAGE_NAME) tests setup.py
-	docformatter --wrap-summaries 100 --wrap-descriptions 100 --pre-summary-newline -i -r $(PACKAGE_NAME) tests setup.py
+lint: ## check with ruff
+	ruff check $(PACKAGE_NAME) tests setup.py
+	ruff format --diff $(PACKAGE_NAME) tests setup.py
+	docformatter -c -i -r $(PACKAGE_NAME) tests setup.py
+
+lintfix: ## fix with ruff
+	ruff check --fix $(PACKAGE_NAME) tests setup.py  # safe lint fixes only
+	ruff format $(PACKAGE_NAME) tests setup.py
+	docformatter -i -r $(PACKAGE_NAME) tests setup.py
 
 test: ## run tests quickly with the default Python
 	pytest --cov=$(PACKAGE_NAME) tests
-	coverage xml
-
-tc-test:
-	pytest --cov=$(PACKAGE_NAME) --typeguard-packages=$(PACKAGE_NAME) tests
-	coverage xml
-
-dl-tc-test:
-	LONG_TESTS=true pytest --cov=$(PACKAGE_NAME) --typeguard-packages=$(PACKAGE_NAME) tests
 	coverage xml
 
 coverage: ## check code coverage quickly with the default Python

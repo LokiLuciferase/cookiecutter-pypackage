@@ -24,9 +24,6 @@ if __name__ == '__main__':
         remove_file('.github/workflows/docs.yml')
         remove_file('.github/workflows/coverage.yml')
 
-    if '{{ cookiecutter.ci_strategy }}'.lower() != 'bitbucket':
-        remove_file('bitbucket-pipelines.yml')
-
     if '{{ cookiecutter.use_precommit }}' != 'y':
         remove_file('.pre-commit-config.yaml')
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """The setup script."""
+
 from pkg_resources import parse_requirements
 from setuptools import find_packages
 from setuptools import setup
@@ -26,7 +27,7 @@ with open('requirements/test.txt') as test_req:
 } %}
 
 setup(
-    author="{{ cookiecutter.full_name.replace('\"', '\\\"') }}",
+    author='{{ cookiecutter.full_name }}',
     author_email='{{ cookiecutter.email }}',
     python_requires='>=3.8',
     classifiers=[
@@ -42,7 +43,7 @@ setup(
         'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: 3.12',
     ],
-    description="{{ cookiecutter.project_short_description }}",
+    description='{{ cookiecutter.project_short_description }}',
     {%- if 'no' not in cookiecutter.command_line_interface|lower %}
     entry_points={
         'console_scripts': [
@@ -52,7 +53,7 @@ setup(
     {%- endif %}
     install_requires=requirements,
 {%- if cookiecutter.open_source_license in license_classifiers %}
-    license="{{ cookiecutter.open_source_license }}",
+    license='{{ cookiecutter.open_source_license }}',
 {%- endif %}
     long_description=readme + '\n\n' + history,
     include_package_data=True,

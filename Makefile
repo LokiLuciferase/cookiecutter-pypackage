@@ -27,7 +27,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr htmlcov/
 	rm -fr .pytest_cache
 
-bake:
+bake: clean
 	cookiecutter $(BAKE_OPTIONS) . --overwrite-if-exists
 
 watch: bake

@@ -1,13 +1,13 @@
 pip>=21
-black>=22
+ruff>=0.3.4
 bumpver>=2023.1121
 wheel>=0.33.6
 watchdog>=0.9.0
-flake8>=3.7.8
-flake8-rst-docstrings
 coverage>=4.5.4
-Sphinx>=1.8.5
-sphinx-autodoc-typehints>=1.11.1
+Sphinx>=7.2.6
+sphinx-autodoc-typehints>=2.0.0
+sphinx-rtd-theme>=2.0.0
+myst_parser>=2.0.0
 twine>=1.14.0
 {% if cookiecutter.command_line_interface|lower == 'click' -%}
 Click>=8.0
@@ -16,4 +16,4 @@ sphinx-click{% endif %}
 pre-commit>=3.0
 pre-commit-hooks==4.4.0{% endif %}{% if cookiecutter.use_strict_typing == 'y' -%}
 mypy>=1.0{% endif %}
-typeguard>=2.10.0
+typeguard>=2.10.0,<3.0.0

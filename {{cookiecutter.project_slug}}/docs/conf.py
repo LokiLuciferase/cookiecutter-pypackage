@@ -34,6 +34,7 @@ import {{ cookiecutter.project_slug }}  # noqa: E402
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 
 extensions = [
+    'myst_parser',
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinx_autodoc_typehints',
@@ -46,16 +47,15 @@ templates_path = ['_templates']
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = ['.rst', '.md']
 
 # The master toctree document.
 master_doc = 'index'
 
 # General information about the project.
-project = u'{{ cookiecutter.project_name }}'
-copyright = u'{{ cookiecutter.year }}, {{ cookiecutter.full_name }}'
-author = u'{{ cookiecutter.full_name }}'
+project = '{{ cookiecutter.project_name }}'
+copyright = '{{ cookiecutter.year }}, {{ cookiecutter.full_name }}'
+author = '{{ cookiecutter.full_name }}'
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -96,7 +96,7 @@ pygments_style = 'monokai'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'nature'
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a
 # theme further.  For a list of options available for each theme, see the
