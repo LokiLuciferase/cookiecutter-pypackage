@@ -105,7 +105,4 @@ install: clean githash  ## install the package to the active Python's site-packa
 	pip install .
 
 install-dev: clean githash  ## install for development
-	pip install -r requirements/dev.txt
-	pip install -r requirements/test.txt
-	pip install -r requirements/prod.txt
-	pip install .
+	pip install -e .[dev]
